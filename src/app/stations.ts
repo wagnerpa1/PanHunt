@@ -10,8 +10,8 @@ export const stations = [
       "https://www.google.com/maps/dir/?api=1&destination=Neues Rathaus Pfarrkirchen",
     explanation:
       "Das Neue und Alte Rathaus bilden das politische Zentrum von Pfarrkirchen, wo wichtige Entscheidungen getroffen werden.",
-    latitude: 48.4354,
-    longitude: 12.9381,
+    latitude: 48.432074295452225,
+    longitude: 12.93755288502584,
   },
   {
     id: 2,
@@ -24,8 +24,8 @@ export const stations = [
       "https://www.google.com/maps/dir/?api=1&destination=Altstadt Pfarrkirchen",
     explanation:
       "Die Altstadt von Pfarrkirchen, umgeben von der historischen Stadtmauer, erzählt Geschichten aus vergangenen Zeiten.",
-    latitude: 48.4349,
-    longitude: 12.9384,
+    latitude: 48.430529631237086,
+    longitude: 12.937103670314897,
   },
   {
     id: 3,
@@ -38,8 +38,8 @@ export const stations = [
       "https://www.google.com/maps/dir/?api=1&destination=Alte Rennbahn Pfarrkirchen",
     explanation:
       "Die alte Rennbahn war einst ein pulsierendes Zentrum des Pferderennsports in der Region.",
-    latitude: 48.4348,
-    longitude: 12.9349,
+    latitude: 48.42593003831425,
+    longitude: 12.934974694138878,
   },
   {
     id: 4,
@@ -52,8 +52,8 @@ export const stations = [
       "https://www.google.com/maps/dir/?api=1&destination=Heilig-Geist-Spital Pfarrkirchen",
     explanation:
       "Das Heilig-Geist-Spital steht für die lange Tradition der Fürsorge und des sozialen Engagements in Pfarrkirchen.",
-    latitude: 48.4369,
-    longitude: 12.937,
+    latitude: 48.43126241487694,
+    longitude: 12.940665362896686,
   },
   {
     id: 5,
@@ -66,8 +66,8 @@ export const stations = [
       "https://www.google.com/maps/dir/?api=1&destination=Stadtpfarrkirche Pfarrkirchen",
     explanation:
       "Die Stadtpfarrkirche beeindruckt mit ihrer architektonischen Pracht und spirituellen Bedeutung für die Gemeinde.",
-    latitude: 48.4358,
-    longitude: 12.9394,
+    latitude: 48.43162472558443,
+    longitude: 12.939143059866945,
   },
   {
     id: 6,
@@ -80,8 +80,8 @@ export const stations = [
       "https://www.google.com/maps/dir/?api=1&destination=Gartlberg Kirche Pfarrkirchen",
     explanation:
       "Die Gartlbergkirche ist ein Wahrzeichen von Pfarrkirchen, bekannt für ihre barocke Architektur und spirituelle Bedeutung.",
-    latitude: 48.4424,
-    longitude: 12.9422,
+    latitude: 48.43607990965375,
+    longitude: 12.941935200735324,
   },
   {
     id: 7,
@@ -94,7 +94,7 @@ export const stations = [
       "https://www.google.com/maps/dir/?api=1&destination=Wimmer-Ross Pfarrkirchen",
     explanation:
       "Der Wimmer-Ross Brunnen ist ein beliebter Treffpunkt und ein Symbol für die lebendige Stadt Pfarrkirchen.",
-    latitude: 48.4334,
-    longitude: 12.9404,
+    latitude: 48.4319258949956,
+    longitude: 12.938416143001868,
   },
 ];
