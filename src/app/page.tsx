@@ -21,6 +21,9 @@ export default function Home() {
   const [isCompleted, setIsCompleted] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
   const [showOverview, setShowOverview] = useState(false);
+  const [stationStage, setStationStage] = useState<
+    "navigation" | "explanation" | "question"
+  >("navigation"); // "navigation", "explanation", "question"
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
@@ -46,14 +49,9 @@ export default function Home() {
     setSubmitted(true);
 
     if (answer.toLowerCase() === currentStationData.correctAnswer.toLowerCase()) {
-      if (currentStation < totalStations) {
-        setCurrentStation(currentStation + 1);
-        setProgress(((currentStation) / totalStations) * 100);
-        setAnswer("");
-        setSubmitted(false);
-      } else {
-        setIsCompleted(true);
-      }
+      setStationStage("explanation"); // Go to explanation after correct answer
+      setSubmitted(false);
+      setFeedbackMessage("");
     } else {
       setFeedbackMessage("Falsche Antwort. Bitte versuche es erneut.");
     }
@@ -67,6 +65,21 @@ export default function Home() {
   const handleOverviewComplete = () => {
     setShowOverview(false);
     setProgress(((currentStation - 1) / totalStations) * 100);
+  };
+
+  const handleNavigationArrived = () => {
+    setStationStage("question");
+  };
+
+  const handleExplanationComplete = () => {
+    if (currentStation < totalStations) {
+      setCurrentStation(currentStation + 1);
+      setStationStage("navigation");
+      setProgress(((currentStation) / totalStations) * 100);
+      setAnswer("");
+    } else {
+      setIsCompleted(true);
+    }
   };
 
   return (
@@ -99,35 +112,26 @@ export default function Home() {
             Station {currentStation} von {totalStations}
           </p>
 
-          <Card className="w-full max-w-md">
-            <CardHeader>
-              <CardTitle>{stations[currentStation - 1].title}</CardTitle>
-              <CardDescription>
-                {stations[currentStation - 1].riddle}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="grid gap-4">
-              <Input
-                type="text"
-                placeholder="Deine Antwort"
-                value={answer}
-                onChange={(e) => setAnswer(e.target.value)}
-              />
-              {submitted && (
-                <p
-                  className={`text-sm text-center mb-2 ${
-                    feedbackMessage === "Korrekte Antwort!"
-                      ? "text-green-500"
-                      : "text-red-500"
-                  }`}
-                >
-                  {feedbackMessage}
-                </p>
-              )}
-              <Button onClick={handleAnswerSubmit}>Antwort absenden</Button>
-
-            </CardContent>
-          </Card>
+          {stationStage === "navigation" ? (
+            <NavigationScreen
+              station={stations[currentStation - 1]}
+              onArrived={handleNavigationArrived}
+            />
+          ) : stationStage === "explanation" ? (
+            <ExplanationScreen
+              station={stations[currentStation - 1]}
+              onComplete={handleExplanationComplete}
+            />
+          ) : (
+            <QuestionScreen
+              station={stations[currentStation - 1]}
+              answer={answer}
+              setAnswer={setAnswer}
+              feedbackMessage={feedbackMessage}
+              submitted={submitted}
+              handleAnswerSubmit={handleAnswerSubmit}
+            />
+          )}
         </>
       ) : (
         <div className="text-center">
@@ -165,5 +169,111 @@ const RouteOverview: React.FC<RouteOverviewProps> = ({ stations, onComplete }) =
       </ul>
       <Button onClick={onComplete}>Erkundung starten</Button>
     </div>
+  );
+};
+
+interface NavigationScreenProps {
+  station: { id: number; title: string; mapUrl: string };
+  onArrived: () => void;
+}
+
+const NavigationScreen: React.FC<NavigationScreenProps> = ({
+  station,
+  onArrived,
+}) => {
+  return (
+    <Card className="w-full max-w-md">
+      <CardHeader>
+        <CardTitle>Navigation zu {station.title}</CardTitle>
+      </CardHeader>
+      <CardContent className="grid gap-4">
+        <img
+          src={station.mapUrl}
+          alt={`Karte von ${station.title}`}
+          className="rounded-md"
+        />
+        <Button asChild>
+          <a
+            href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+              station.title
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Route in Google Maps öffnen
+          </a>
+        </Button>
+        <Button onClick={onArrived}>Angekommen!</Button>
+      </CardContent>
+    </Card>
+  );
+};
+
+interface ExplanationScreenProps {
+  station: { id: number; title: string; explanation: string };
+  onComplete: () => void;
+}
+
+const ExplanationScreen: React.FC<ExplanationScreenProps> = ({
+  station,
+  onComplete,
+}) => {
+  return (
+    <Card className="w-full max-w-md">
+      <CardHeader>
+        <CardTitle>Mehr über {station.title}</CardTitle>
+      </CardHeader>
+      <CardContent className="grid gap-4">
+        <p>{station.explanation}</p>
+        <Button onClick={onComplete}>Weiter</Button>
+      </CardContent>
+    </Card>
+  );
+};
+
+interface QuestionScreenProps {
+  station: { id: number; title: string; riddle: string; correctAnswer: string };
+  answer: string;
+  setAnswer: (answer: string) => void;
+  feedbackMessage: string;
+  submitted: boolean;
+  handleAnswerSubmit: () => void;
+}
+
+const QuestionScreen: React.FC<QuestionScreenProps> = ({
+  station,
+  answer,
+  setAnswer,
+  feedbackMessage,
+  submitted,
+  handleAnswerSubmit,
+}) => {
+  return (
+    <Card className="w-full max-w-md">
+      <CardHeader>
+        <CardTitle>{station.title}</CardTitle>
+        <CardDescription>{station.riddle}</CardDescription>
+      </CardHeader>
+      <CardContent className="grid gap-4">
+        <Input
+          type="text"
+          placeholder="Deine Antwort"
+          value={answer}
+          onChange={(e) => setAnswer(e.target.value)}
+        />
+        {submitted && (
+          <p
+            className={`text-sm text-center mb-2 ${
+              feedbackMessage === "Korrekte Antwort!"
+                ? "text-green-500"
+                : "text-red-500"
+            }`}
+          >
+            {feedbackMessage}
+          </p>
+        )}
+        <Button onClick={handleAnswerSubmit}>Antwort absenden</Button>
+      </CardContent>
+    </Card>
   );
 };
