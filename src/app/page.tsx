@@ -22,6 +22,7 @@ export default function Home() {
   const [showWelcome, setShowWelcome] = useState(true);
   const [showOverview, setShowOverview] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     // Simulate loading or any initial setup
@@ -42,12 +43,15 @@ export default function Home() {
       return;
     }
 
+    setSubmitted(true);
+
     if (answer.toLowerCase() === currentStationData.correctAnswer.toLowerCase()) {
       setFeedbackMessage("Correct answer!");
       if (currentStation < totalStations) {
         setCurrentStation(currentStation + 1);
         setProgress(((currentStation) / totalStations) * 100);
         setAnswer("");
+        setSubmitted(false);
       } else {
         setIsCompleted(true);
       }
@@ -110,7 +114,7 @@ export default function Home() {
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}
               />
-              {feedbackMessage && (
+              {submitted && (
                 <p
                   className={`text-sm text-center mb-2 ${
                     feedbackMessage === "Correct answer!"
