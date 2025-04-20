@@ -211,7 +211,7 @@ const RouteOverview: React.FC<RouteOverviewProps> = ({
       <div className="mb-4 w-full max-w-md map-animation-container">
         <Map stations={stations} currentStation={0} zoom={12} />
       </div>
-      <ul className="list-none pl-0 timeline max-w-md w-full">
+      <ul className="list-none pl-0 max-w-md w-full">
         {stations.map((station) => (
           <li key={station.id} className="mb-2">
             <strong>{station.title}</strong>
@@ -321,8 +321,7 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
   feedbackMessage,
   submitted,
   handleAnswerSubmit,
-  onBackToNavigation,
-}) => {
+  onBackToNavigation,}) => {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
