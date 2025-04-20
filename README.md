@@ -1,5 +1,7 @@
-# Firebase Studio
+# Pfarrkirchen Explorer
 
-This is a NextJS starter in Firebase Studio.
+This Next.js application is a scavenger hunt that guides users through the town of Pfarrkirchen, Germany.  It presents riddles for different stations, and upon answering them correctly, provides explanations about each location, and allows the user to download a digital certificate upon completion.
 
-To get started, take a look at src/app/page.tsx.
+## Getting Started
+
+To get started, clone the repository and run `npm install` followed by `npm run dev`.
