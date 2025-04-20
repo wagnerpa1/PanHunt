@@ -6,9 +6,10 @@ import { Icon } from "@iconify/react";
 interface MapProps {
   stations: { id: number; title: string }[];
   currentStation: number;
+  zoom?: number;
 }
 
-export const Map: React.FC<MapProps> = ({ stations, currentStation }) => {
+export const Map: React.FC<MapProps> = ({ stations, currentStation, zoom = 13 }) => {
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -17,7 +18,7 @@ export const Map: React.FC<MapProps> = ({ stations, currentStation }) => {
       require("leaflet/dist/leaflet.css");
 
       if (mapRef.current && mapRef.current.children.length === 0) {
-        const map = L.map(mapRef.current).setView([48.4376, 12.9398], 13); // Pfarrkirchen coordinates and zoom level
+        const map = L.map(mapRef.current).setView([48.4376, 12.9398], zoom); // Pfarrkirchen coordinates and zoom level
 
         L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 19,
@@ -46,7 +47,7 @@ export const Map: React.FC<MapProps> = ({ stations, currentStation }) => {
         mapRef.current.leafletElement.remove();
       }
     };
-  }, [stations, currentStation]);
+  }, [stations, currentStation, zoom]);
 
   // Temporary function to provide coordinates for each station
   const getCoordinatesForStation = (stationId: number) => {
