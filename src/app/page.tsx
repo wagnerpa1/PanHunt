@@ -44,7 +44,7 @@ export default function Home() {
     if (answer.toLowerCase() === currentStationData.correctAnswer.toLowerCase()) {
       if (currentStation < totalStations) {
         setCurrentStation(currentStation + 1);
-        setProgress(((currentStation - 1) / totalStations) * 100);
+        setProgress(((currentStation) / totalStations) * 100);
         setAnswer("");
       } else {
         setIsCompleted(true);
