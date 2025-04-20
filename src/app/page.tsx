@@ -214,7 +214,7 @@ const RouteOverview: React.FC<RouteOverviewProps> = ({
       <ul className="list-none pl-0 timeline max-w-md w-full">
         {stations.map((station) => (
           <li key={station.id} className="mb-2">
-            {station.title}
+            <strong>{station.title}</strong>
           </li>
         ))}
       </ul>
@@ -247,7 +247,7 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({
           <img
             src={station.mapUrl}
             alt={`Karte von ${station.title}`}
-            className="rounded-md map-animation-container"
+            className="rounded-md"
           />
         </div>
         <Button asChild className="transition-transform hover:scale-105">
@@ -289,7 +289,7 @@ const ExplanationScreen: React.FC<ExplanationScreenProps> = ({
           <img
             src={station.mapUrl}
             alt={`Karte von ${station.title}`}
-            className="rounded-md map-animation-container"
+            className="rounded-md"
           />
         </div>
         <p>{station.explanation}</p>
