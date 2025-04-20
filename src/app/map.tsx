@@ -15,7 +15,6 @@ export const Map: React.FC<MapProps> = ({ stations, currentStation, zoom = 13 })
   useEffect(() => {
     const loadMap = async () => {
       const L = require("leaflet");
-      require("leaflet/dist/leaflet.css");
 
       if (mapRef.current && mapRef.current.children.length === 0) {
         const map = L.map(mapRef.current).setView([48.4376, 12.9398], zoom); // Pfarrkirchen coordinates and zoom level
@@ -39,6 +38,11 @@ export const Map: React.FC<MapProps> = ({ stations, currentStation, zoom = 13 })
       }
     };
 
+    const loadLeafletStyles = async () => {
+      await import('leaflet/dist/leaflet.css');
+    };
+
+    loadLeafletStyles();
     loadMap();
 
     return () => {
