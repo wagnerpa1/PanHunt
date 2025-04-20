@@ -38,6 +38,19 @@ body {
   border: 2px solid hsl(var(--background));
 }
 
+.map-animation-container {
+  animation: mapAnimation 5s infinite alternate;
+}
+
+@keyframes mapAnimation {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
 
 @layer base {
   * {
@@ -131,3 +144,4 @@ body {
     text-wrap: balance;
   }
 }
+

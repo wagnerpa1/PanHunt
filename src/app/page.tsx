@@ -24,7 +24,7 @@ export default function Home() {
   const [showOverview, setShowOverview] = useState(false);
   const [stationStage, setStationStage/*<
     "navigation" | "explanation" | "question"
-  >*/] = useState("navigation"); // "navigation", "explanation", "question"
+  >*/] = useState<"navigation" | "explanation" | "question">("navigation"); // "navigation", "explanation", "question"
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
@@ -207,11 +207,13 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({
         <CardTitle>Navigation zu {station.title}</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <img
-          src={station.mapUrl}
-          alt={`Karte von ${station.title}`}
-          className="rounded-md"
-        />
+        <div className="map-animation-container">
+          <img
+            src={station.mapUrl}
+            alt={`Karte von ${station.title}`}
+            className="rounded-md"
+          />
+        </div>
         <Button asChild className="transition-transform hover:scale-105">
           <a
             href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
@@ -244,6 +246,13 @@ const ExplanationScreen: React.FC<ExplanationScreenProps> = ({
         <CardTitle>Mehr über {station.title}</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4">
+        <div className="map-animation-container">
+          <img
+            src={station.mapUrl}
+            alt={`Karte von ${station.title}`}
+            className="rounded-md"
+          />
+        </div>
         <p>{station.explanation}</p>
         <Button onClick={onComplete} className="transition-transform hover:scale-105">Weiter</Button>
       </CardContent>
