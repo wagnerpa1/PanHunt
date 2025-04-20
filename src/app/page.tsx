@@ -21,6 +21,7 @@ export default function Home() {
   const [isCompleted, setIsCompleted] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
   const [showOverview, setShowOverview] = useState(false);
+  const [feedbackMessage, setFeedbackMessage] = useState("");
 
   useEffect(() => {
     // Simulate loading or any initial setup
@@ -37,11 +38,12 @@ export default function Home() {
     const currentStationData = stations[currentStation - 1];
 
     if (!currentStationData) {
-      alert("Station data not found.");
+      setFeedbackMessage("Station data not found.");
       return;
     }
 
     if (answer.toLowerCase() === currentStationData.correctAnswer.toLowerCase()) {
+      setFeedbackMessage("Correct answer!");
       if (currentStation < totalStations) {
         setCurrentStation(currentStation + 1);
         setProgress(((currentStation) / totalStations) * 100);
@@ -50,7 +52,7 @@ export default function Home() {
         setIsCompleted(true);
       }
     } else {
-      alert("Incorrect answer. Please try again.");
+      setFeedbackMessage("Incorrect answer. Please try again.");
     }
   };
 
@@ -59,10 +61,10 @@ export default function Home() {
     setShowOverview(true);
   };
 
-    const handleOverviewComplete = () => {
-      setShowOverview(false);
-      setProgress(((currentStation - 1) / totalStations) * 100);
-    };
+  const handleOverviewComplete = () => {
+    setShowOverview(false);
+    setProgress(((currentStation - 1) / totalStations) * 100);
+  };
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-background py-8 px-4">
@@ -109,6 +111,9 @@ export default function Home() {
                 onChange={(e) => setAnswer(e.target.value)}
               />
               <Button onClick={handleAnswerSubmit}>Submit Answer</Button>
+              {feedbackMessage && (
+                <p className="text-sm text-muted-foreground">{feedbackMessage}</p>
+              )}
             </CardContent>
           </Card>
         </>
