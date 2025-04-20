@@ -203,7 +203,7 @@ const RouteOverview: React.FC<RouteOverviewProps> = ({ stations, onComplete }) =
 };
 
 interface NavigationScreenProps {
-  station: { id: number; title: string; mapUrl: string };
+  station: { id: number; title: string; mapUrl: string, googleMapsLink: string };
   onArrived: () => void;
 }
 
@@ -226,9 +226,7 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({
         </div>
         <Button asChild className="transition-transform hover:scale-105">
           <a
-            href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-              station.title
-            )}`}
+            href={station.googleMapsLink}
             target="_blank"
             rel="noopener noreferrer"
           >
