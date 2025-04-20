@@ -22,9 +22,9 @@ export default function Home() {
   const [isCompleted, setIsCompleted] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
   const [showOverview, setShowOverview] = useState(false);
-  const [stationStage, setStationStage/*<
+  const [stationStage, setStationStage] = useState<
     "navigation" | "explanation" | "question"
-  >*/] = useState<"navigation" | "explanation" | "question">("navigation"); // "navigation", "explanation", "question"
+  >("navigation"); // "navigation", "explanation", "question"
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
@@ -114,7 +114,7 @@ export default function Home() {
       ) : showOverview ? (
         <RouteOverview stations={stations} onComplete={handleOverviewComplete} />
       ) : !isCompleted ? (
-        <div className="transition-opacity duration-500">
+        <div className="transition-all duration-500 ease-in-out w-full max-w-md">
           <header className="text-center mb-8">
             <h1 className="text-3xl font-bold text-foreground">
               Pfarrkirchen Explorer
@@ -129,26 +129,36 @@ export default function Home() {
             Station {currentStation} von {totalStations}
           </p>
 
-          {stationStage === "navigation" ? (
-            <NavigationScreen
-              station={stations[currentStation - 1]}
-              onArrived={handleNavigationArrived}
-            />
-          ) : stationStage === "explanation" ? (
-            <ExplanationScreen
-              station={stations[currentStation - 1]}
-              onComplete={handleExplanationComplete}
-            />
-          ) : (
-            <QuestionScreen
-              station={stations[currentStation - 1]}
-              answer={answer}
-              setAnswer={setAnswer}
-              feedbackMessage={feedbackMessage}
-              submitted={submitted}
-              handleAnswerSubmit={handleAnswerSubmit}
-            />
-          )}
+          <div className="relative h-full">
+            {stationStage === "navigation" && (
+              <div className="slide-in-right">
+                <NavigationScreen
+                  station={stations[currentStation - 1]}
+                  onArrived={handleNavigationArrived}
+                />
+              </div>
+            )}
+            {stationStage === "explanation" && (
+              <div className="slide-in-right">
+                <ExplanationScreen
+                  station={stations[currentStation - 1]}
+                  onComplete={handleExplanationComplete}
+                />
+              </div>
+            )}
+            {stationStage === "question" && (
+              <div className="slide-in-right">
+                <QuestionScreen
+                  station={stations[currentStation - 1]}
+                  answer={answer}
+                  setAnswer={setAnswer}
+                  feedbackMessage={feedbackMessage}
+                  submitted={submitted}
+                  handleAnswerSubmit={handleAnswerSubmit}
+                />
+              </div>
+            )}
+          </div>
         </div>
       ) : (
         <div className="text-center">
@@ -211,7 +221,7 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({
           <img
             src={station.mapUrl}
             alt={`Karte von ${station.title}`}
-            className="rounded-md"
+            className="rounded-md map-animation-container"
           />
         </div>
         <Button asChild className="transition-transform hover:scale-105">
@@ -250,7 +260,7 @@ const ExplanationScreen: React.FC<ExplanationScreenProps> = ({
           <img
             src={station.mapUrl}
             alt={`Karte von ${station.title}`}
-            className="rounded-md"
+            className="rounded-md map-animation-container"
           />
         </div>
         <p>{station.explanation}</p>
