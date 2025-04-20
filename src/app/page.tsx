@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -12,7 +12,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { getLocationInfo } from "@/services/open-street-maps";
 import { Map } from "./map";
 
 const stations = [
@@ -58,6 +57,16 @@ export default function Home() {
   const [progress, setProgress] = useState(0);
   const [answer, setAnswer] = useState("");
   const [isCompleted, setIsCompleted] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading or any initial setup
+    const timer = setTimeout(() => {
+      setShowWelcome(false);
+    }, 3000); // Show welcome screen for 3 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const totalStations = stations.length;
 
@@ -78,60 +87,73 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-background py-8 px-4">
-      <header className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-foreground">
-          Pfarrkirchen Explorer
-        </h1>
-        <p className="text-muted-foreground">
-          Discover the hidden gems of Pfarrkirchen!
-        </p>
-      </header>
-
-      <Progress value={progress} className="w-full max-w-md mb-4" />
-      <p className="text-sm text-muted-foreground mb-4">
-        Station {currentStation} of {totalStations}
-      </p>
-
-      {!isCompleted ? (
-        <Card className="w-full max-w-md">
-          <CardHeader>
-            <CardTitle>{stations[currentStation - 1].title}</CardTitle>
-            <CardDescription>
-              {stations[currentStation - 1].riddle}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-4">
-            <Input
-              type="text"
-              placeholder="Your Answer"
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
-            />
-            <Button onClick={handleAnswerSubmit}>Submit Answer</Button>
-          </CardContent>
-        </Card>
-      ) : (
+      {showWelcome ? (
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-foreground mb-4">
-            Congratulations!
-          </h2>
-          <p className="text-muted-foreground">
-            You have completed all stations of the Pfarrkirchen Explorer!
+          <h1 className="text-4xl font-bold text-foreground mb-4">
+            Welcome to Pfarrkirchen Explorer!
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            Get ready to discover the hidden gems of Pfarrkirchen.
           </p>
-          {/* Completion Recap and Share Button can be added here */}
         </div>
-      )}
+      ) : (
+        <>
+          <header className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-foreground">
+              Pfarrkirchen Explorer
+            </h1>
+            <p className="text-muted-foreground">
+              Discover the hidden gems of Pfarrkirchen!
+            </p>
+          </header>
 
-      <div className="fixed bottom-4 right-4">
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="outline">Show Map</Button>
-          </DialogTrigger>
-          <DialogContent>
-            <Map stations={stations} currentStation={currentStation} />
-          </DialogContent>
-        </Dialog>
-      </div>
+          <Progress value={progress} className="w-full max-w-md mb-4" />
+          <p className="text-sm text-muted-foreground mb-4">
+            Station {currentStation} of {totalStations}
+          </p>
+
+          {!isCompleted ? (
+            <Card className="w-full max-w-md">
+              <CardHeader>
+                <CardTitle>{stations[currentStation - 1].title}</CardTitle>
+                <CardDescription>
+                  {stations[currentStation - 1].riddle}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="grid gap-4">
+                <Input
+                  type="text"
+                  placeholder="Your Answer"
+                  value={answer}
+                  onChange={(e) => setAnswer(e.target.value)}
+                />
+                <Button onClick={handleAnswerSubmit}>Submit Answer</Button>
+              </CardContent>
+            </Card>
+          ) : (
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-foreground mb-4">
+                Congratulations!
+              </h2>
+              <p className="text-muted-foreground">
+                You have completed all stations of the Pfarrkirchen Explorer!
+              </p>
+              {/* Completion Recap and Share Button can be added here */}
+            </div>
+          )}
+
+          <div className="fixed bottom-4 right-4">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline">Show Map</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <Map stations={stations} currentStation={currentStation} />
+              </DialogContent>
+            </Dialog>
+          </div>
+        </>
+      )}
     </div>
   );
 }
