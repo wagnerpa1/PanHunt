@@ -22,8 +22,9 @@ export default function Home() {
   const [isCompleted, setIsCompleted] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
   const [showOverview, setShowOverview] = useState(false);
-  const [stationStage, setStationStage] =
-    useState<"navigation" | "explanation" | "question">("navigation"); // "navigation", "explanation", "question"
+  const [stationStage, setStationStage] = useState<
+    "navigation" | "explanation" | "question"
+  >("navigation"); // "navigation", "explanation", "question"
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
@@ -211,13 +212,13 @@ const RouteOverview: React.FC<RouteOverviewProps> = ({
       <div className="mb-4 w-full max-w-md map-animation-container">
         <Map stations={stations} currentStation={0} zoom={12} />
       </div>
-      <ul className="list-none pl-0 max-w-md w-full">
+      <ol className="list-decimal list-inside pl-0 max-w-md w-full">
         {stations.map((station) => (
           <li key={station.id} className="mb-2">
             <strong>{station.title}</strong>
           </li>
         ))}
-      </ul>
+      </ol>
       <Button
         onClick={onComplete}
         className="transition-transform hover:scale-105"
@@ -229,7 +230,12 @@ const RouteOverview: React.FC<RouteOverviewProps> = ({
 };
 
 interface NavigationScreenProps {
-  station: { id: number; title: string; mapUrl: string; googleMapsLink: string };
+  station: {
+    id: number;
+    title: string;
+    mapUrl: string;
+    googleMapsLink: string;
+  };
   onArrived: () => void;
 }
 
@@ -305,7 +311,12 @@ const ExplanationScreen: React.FC<ExplanationScreenProps> = ({
 };
 
 interface QuestionScreenProps {
-  station: { id: number; title: string; riddle: string; correctAnswer: string };
+  station: {
+    id: number;
+    title: string;
+    riddle: string;
+    correctAnswer: string;
+  };
   answer: string;
   setAnswer: (answer: string) => void;
   feedbackMessage: string;
@@ -321,7 +332,8 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
   feedbackMessage,
   submitted,
   handleAnswerSubmit,
-  onBackToNavigation,}) => {
+  onBackToNavigation,
+}) => {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
