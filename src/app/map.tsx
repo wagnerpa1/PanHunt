@@ -53,19 +53,19 @@ export const Map: React.FC<MapProps> = ({ stations, currentStation, zoom = 13 })
   const getCoordinatesForStation = (stationId: number) => {
     switch (stationId) {
       case 1:
-        return { latitude: 48.4424, longitude: 12.9422 }; // Gartlberg Church
+        return { latitude: 48.4354, longitude: 12.9381 }; // New + Old Town Hall
       case 2:
-        return { latitude: 48.4348, longitude: 12.9349 }; // Old Racetrack Area
-      case 3:
         return { latitude: 48.4349, longitude: 12.9384 }; // Altstadt / City Wall
+      case 3:
+        return { latitude: 48.4348, longitude: 12.9349 }; // Old Racetrack Area
       case 4:
-        return { latitude: 48.4334, longitude: 12.9404 }; // Wimmer-Ross Fountain
+        return { latitude: 48.4369, longitude: 12.9370 }; // Heilig-Geist-Spital
       case 5:
         return { latitude: 48.4358, longitude: 12.9394 }; // City Parish Church
       case 6:
-        return { latitude: 48.4354, longitude: 12.9381 }; // New + Old Town Hall
+        return { latitude: 48.4424, longitude: 12.9422 }; // Gartlberg Church
       case 7:
-        return { latitude: 48.4369, longitude: 12.9370 }; // Heilig-Geist-Spital
+        return { latitude: 48.4334, longitude: 12.9404 }; // Wimmer-Ross Fountain
       default:
         return null;
     }

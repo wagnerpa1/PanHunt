@@ -1,28 +1,17 @@
 export const stations = [
   {
     id: 1,
-    title: "Gartlberg Kirche",
+    title: "Neues + Altes Rathaus",
     riddle:
-      "Ich stehe hoch, ein Leuchtfeuer des Glaubens, wo stille Glocken mit Anmut widerhallen. Finde mich auf der Spitze des Berges, wo du Trost finden wirst.",
-    correctAnswer: "Gartlberg Kirche",
+      "Wo Entscheidungen getroffen werden und Gesetze ihren Lauf nehmen, entfaltet sich die Regierung und gestaltet Tag und Nacht. Zwei Hallen stehen als eine, alt und neu vereint.",
+    correctAnswer: "Rathaus",
     mapUrl: "https://picsum.photos/400/300", // Placeholder map URL
-    googleMapsLink: "https://www.google.com/maps/dir/?api=1&destination=Gartlberg Kirche Pfarrkirchen",
+    googleMapsLink: "https://www.google.com/maps/dir/?api=1&destination=Neues Rathaus Pfarrkirchen",
     explanation:
-      "Die Gartlbergkirche ist ein Wahrzeichen von Pfarrkirchen, bekannt für ihre barocke Architektur und spirituelle Bedeutung.",
+      "Das Neue und Alte Rathaus bilden das politische Zentrum von Pfarrkirchen, wo wichtige Entscheidungen getroffen werden.",
   },
   {
     id: 2,
-    title: "Alte Rennbahn",
-    riddle:
-      "Wo einst Pferde donnerten, wohnen jetzt Erinnerungen, eine Spur der Vergangenheit, wo Geschwindigkeit und Nervenkitzel zusammentreffen. Suche die Überreste des Ovals, wo die Geschichte erhalten bleibt.",
-    correctAnswer: "Alte Rennbahn",
-    mapUrl: "https://picsum.photos/400/300", // Placeholder map URL
-    googleMapsLink: "https://www.google.com/maps/dir/?api=1&destination=Alte Rennbahn Pfarrkirchen",
-    explanation:
-      "Die alte Rennbahn war einst ein pulsierendes Zentrum des Pferderennsports in der Region.",
-  },
-  {
-    id: 3,
     title: "Altstadt / Stadtmauer",
     riddle:
       "Steingekleidete Umarmung, die unzählige Geschichten bewacht, wandere den Pfad entlang, wo sich die Geschichte entfaltet. Entdecke, wo die Vergangenheit noch immer hoch steht.",
@@ -33,15 +22,26 @@ export const stations = [
       "Die Altstadt von Pfarrkirchen, umgeben von der historischen Stadtmauer, erzählt Geschichten aus vergangenen Zeiten.",
   },
   {
-    id: 4,
-    title: "Wimmer-Ross Brunnen",
+    id: 3,
+    title: "Alte Rennbahn",
     riddle:
-      "Inmitten des Stadtzentrums tanzt das Wasser frei, ein Symbol des Lebens für alle. Suche die trinkenden Pferde, wo lebensspendende Wasser entspringen.",
-    correctAnswer: "Wimmer-Ross Brunnen",
+      "Wo einst Pferde donnerten, wohnen jetzt Erinnerungen, eine Spur der Vergangenheit, wo Geschwindigkeit und Nervenkitzel zusammentreffen. Suche die Überreste des Ovals, wo die Geschichte erhalten bleibt.",
+    correctAnswer: "Alte Rennbahn",
     mapUrl: "https://picsum.photos/400/300", // Placeholder map URL
-    googleMapsLink: "https://www.google.com/maps/dir/?api=1&destination=Wimmer-Ross Brunnen Pfarrkirchen",
+    googleMapsLink: "https://www.google.com/maps/dir/?api=1&destination=Alte Rennbahn Pfarrkirchen",
     explanation:
-      "Der Wimmer-Ross Brunnen ist ein beliebter Treffpunkt und ein Symbol für die lebendige Stadt Pfarrkirchen.",
+      "Die alte Rennbahn war einst ein pulsierendes Zentrum des Pferderennsports in der Region.",
+  },
+  {
+    id: 4,
+    title: "Heilig-Geist-Spital",
+    riddle:
+      "In der Umarmung des Geistes wohnen Fürsorge und Trost, eine Oase der Heilung, in der Mitgefühl der Wegweiser ist. Suche den Ort der Fürsorge, wo der Heilige Geist ist.",
+    correctAnswer: "Heilig-Geist-Spital",
+    mapUrl: "https://picsum.photos/400/300", // Placeholder map URL
+    googleMapsLink: "https://www.google.com/maps/dir/?api=1&destination=Heilig-Geist-Spital Pfarrkirchen",
+    explanation:
+      "Das Heilig-Geist-Spital steht für die lange Tradition der Fürsorge und des sozialen Engagements in Pfarrkirchen.",
   },
   {
     id: 5,
@@ -56,24 +56,24 @@ export const stations = [
   },
   {
     id: 6,
-    title: "Neues + Altes Rathaus",
+    title: "Gartlberg Kirche",
     riddle:
-      "Wo Entscheidungen getroffen werden und Gesetze ihren Lauf nehmen, entfaltet sich die Regierung und gestaltet Tag und Nacht. Zwei Hallen stehen als eine, alt und neu vereint.",
-    correctAnswer: "Rathaus",
+      "Ich stehe hoch, ein Leuchtfeuer des Glaubens, wo stille Glocken mit Anmut widerhallen. Finde mich auf der Spitze des Berges, wo du Trost finden wirst.",
+    correctAnswer: "Gartlberg Kirche",
     mapUrl: "https://picsum.photos/400/300", // Placeholder map URL
-    googleMapsLink: "https://www.google.com/maps/dir/?api=1&destination=Neues Rathaus Pfarrkirchen",
+    googleMapsLink: "https://www.google.com/maps/dir/?api=1&destination=Gartlberg Kirche Pfarrkirchen",
     explanation:
-      "Das Neue und Alte Rathaus bilden das politische Zentrum von Pfarrkirchen, wo wichtige Entscheidungen getroffen werden.",
+      "Die Gartlbergkirche ist ein Wahrzeichen von Pfarrkirchen, bekannt für ihre barocke Architektur und spirituelle Bedeutung.",
   },
   {
     id: 7,
-    title: "Heilig-Geist-Spital",
+    title: "Wimmer-Ross Brunnen",
     riddle:
-      "In der Umarmung des Geistes wohnen Fürsorge und Trost, eine Oase der Heilung, in der Mitgefühl der Wegweiser ist. Suche den Ort der Fürsorge, wo der Heilige Geist ist.",
-    correctAnswer: "Heilig-Geist-Spital",
+      "Inmitten des Stadtzentrums tanzt das Wasser frei, ein Symbol des Lebens für alle. Suche die trinkenden Pferde, wo lebensspendende Wasser entspringen.",
+    correctAnswer: "Wimmer-Ross Brunnen",
     mapUrl: "https://picsum.photos/400/300", // Placeholder map URL
-    googleMapsLink: "https://www.google.com/maps/dir/?api=1&destination=Heilig-Geist-Spital Pfarrkirchen",
+    googleMapsLink: "https://www.google.com/maps/dir/?api=1&destination=Wimmer-Ross Brunnen Pfarrkirchen",
     explanation:
-      "Das Heilig-Geist-Spital steht für die lange Tradition der Fürsorge und des sozialen Engagements in Pfarrkirchen.",
+      "Der Wimmer-Ross Brunnen ist ein beliebter Treffpunkt und ein Symbol für die lebendige Stadt Pfarrkirchen.",
   },
 ];
