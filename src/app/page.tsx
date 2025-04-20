@@ -114,7 +114,7 @@ export default function Home() {
       ) : showOverview ? (
         <RouteOverview stations={stations} onComplete={handleOverviewComplete} />
       ) : !isCompleted ? (
-        <>
+        <div className="transition-opacity duration-500">
           <header className="text-center mb-8">
             <h1 className="text-3xl font-bold text-foreground">
               Pfarrkirchen Explorer
@@ -149,7 +149,7 @@ export default function Home() {
               handleAnswerSubmit={handleAnswerSubmit}
             />
           )}
-        </>
+        </div>
       ) : (
         <div className="text-center">
           <h2 className="text-2xl font-bold text-foreground mb-4">
@@ -207,7 +207,7 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({
         <CardTitle>Navigation zu {station.title}</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <div className="map-animation-container">
+        <div >
           <img
             src={station.mapUrl}
             alt={`Karte von ${station.title}`}
@@ -232,7 +232,7 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({
 };
 
 interface ExplanationScreenProps {
-  station: { id: number; title: string; explanation: string };
+  station: { id: number; title: string; explanation: string, mapUrl: string };
   onComplete: () => void;
 }
 
@@ -246,7 +246,7 @@ const ExplanationScreen: React.FC<ExplanationScreenProps> = ({
         <CardTitle>Mehr über {station.title}</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <div className="map-animation-container">
+      <div >
           <img
             src={station.mapUrl}
             alt={`Karte von ${station.title}`}
