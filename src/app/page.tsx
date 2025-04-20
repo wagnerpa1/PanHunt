@@ -22,9 +22,9 @@ export default function Home() {
   const [isCompleted, setIsCompleted] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
   const [showOverview, setShowOverview] = useState(false);
-  const [stationStage, setStationStage] = useState<
+  const [stationStage, setStationStage/*<
     "navigation" | "explanation" | "question"
-  >("navigation"); // "navigation", "explanation", "question"
+  >*/] = useState("navigation"); // "navigation", "explanation", "question"
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
@@ -275,6 +275,9 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
         <CardDescription>{station.riddle}</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
+        {feedbackMessage && (
+          <div className="text-center text-red-500 mb-2">{feedbackMessage}</div>
+        )}
         <Input
           type="text"
           placeholder="Deine Antwort"
