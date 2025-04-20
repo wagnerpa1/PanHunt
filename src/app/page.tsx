@@ -114,7 +114,7 @@ export default function Home() {
       ) : showOverview ? (
         <RouteOverview stations={stations} onComplete={handleOverviewComplete} />
       ) : !isCompleted ? (
-        <div className="transition-all duration-500 ease-in-out w-full max-w-md">
+        <div className="transition-all duration-300 ease-out w-full max-w-md">
           <header className="text-center mb-8">
             <h1 className="text-3xl font-bold text-foreground">
               Pfarrkirchen Explorer
