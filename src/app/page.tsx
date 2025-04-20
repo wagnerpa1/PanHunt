@@ -61,11 +61,11 @@ export default function Home() {
 
   useEffect(() => {
     // Simulate loading or any initial setup
-    const timer = setTimeout(() => {
-      setShowWelcome(false);
-    }, 3000); // Show welcome screen for 3 seconds
+    // const timer = setTimeout(() => {
+    //   setShowWelcome(false);
+    // }, 3000); // Show welcome screen for 3 seconds
 
-    return () => clearTimeout(timer);
+    // return () => clearTimeout(timer);
   }, []);
 
   const totalStations = stations.length;
@@ -85,6 +85,10 @@ export default function Home() {
     }
   };
 
+  const handleStartClick = () => {
+    setShowWelcome(false);
+  };
+
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-background py-8 px-4">
       {showWelcome ? (
@@ -95,6 +99,7 @@ export default function Home() {
           <p className="text-lg text-muted-foreground">
             Get ready to discover the hidden gems of Pfarrkirchen.
           </p>
+          <Button onClick={handleStartClick}>Start</Button>
         </div>
       ) : (
         <>
