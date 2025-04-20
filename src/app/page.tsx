@@ -39,14 +39,13 @@ export default function Home() {
     const currentStationData = stations[currentStation - 1];
 
     if (!currentStationData) {
-      setFeedbackMessage("Station data not found.");
+      setFeedbackMessage("Stationsdaten nicht gefunden.");
       return;
     }
 
     setSubmitted(true);
 
     if (answer.toLowerCase() === currentStationData.correctAnswer.toLowerCase()) {
-      setFeedbackMessage("Correct answer!");
       if (currentStation < totalStations) {
         setCurrentStation(currentStation + 1);
         setProgress(((currentStation) / totalStations) * 100);
@@ -56,7 +55,7 @@ export default function Home() {
         setIsCompleted(true);
       }
     } else {
-      setFeedbackMessage("Incorrect answer. Please try again.");
+      setFeedbackMessage("Falsche Antwort. Bitte versuche es erneut.");
     }
   };
 
@@ -75,12 +74,12 @@ export default function Home() {
       {showWelcome ? (
         <div className="text-center">
           <h1 className="text-4xl font-bold text-foreground mb-4">
-            Welcome to Pfarrkirchen Explorer!
+            Willkommen beim Pfarrkirchen Explorer!
           </h1>
           <p className="text-lg text-muted-foreground">
-            Get ready to discover the hidden gems of Pfarrkirchen.
+            Mach dich bereit, die verborgenen Schätze von Pfarrkirchen zu entdecken.
           </p>
-          <Button onClick={handleStartClick}>Start</Button>
+          <Button onClick={handleStartClick}>Starten</Button>
         </div>
       ) : showOverview ? (
         <RouteOverview stations={stations} onComplete={handleOverviewComplete} />
@@ -91,13 +90,13 @@ export default function Home() {
               Pfarrkirchen Explorer
             </h1>
             <p className="text-muted-foreground">
-              Discover the hidden gems of Pfarrkirchen!
+              Entdecke die verborgenen Schätze von Pfarrkirchen!
             </p>
           </header>
 
           <Progress value={progress} className="w-full max-w-md mb-4" />
           <p className="text-sm text-muted-foreground mb-4">
-            Station {currentStation} of {totalStations}
+            Station {currentStation} von {totalStations}
           </p>
 
           <Card className="w-full max-w-md">
@@ -110,14 +109,14 @@ export default function Home() {
             <CardContent className="grid gap-4">
               <Input
                 type="text"
-                placeholder="Your Answer"
+                placeholder="Deine Antwort"
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}
               />
               {submitted && (
                 <p
                   className={`text-sm text-center mb-2 ${
-                    feedbackMessage === "Correct answer!"
+                    feedbackMessage === "Korrekte Antwort!"
                       ? "text-green-500"
                       : "text-red-500"
                   }`}
@@ -125,7 +124,7 @@ export default function Home() {
                   {feedbackMessage}
                 </p>
               )}
-              <Button onClick={handleAnswerSubmit}>Submit Answer</Button>
+              <Button onClick={handleAnswerSubmit}>Antwort absenden</Button>
 
             </CardContent>
           </Card>
@@ -133,10 +132,10 @@ export default function Home() {
       ) : (
         <div className="text-center">
           <h2 className="text-2xl font-bold text-foreground mb-4">
-            Congratulations!
+            Herzlichen Glückwunsch!
           </h2>
           <p className="text-muted-foreground">
-            You have completed all stations of the Pfarrkirchen Explorer!
+            Du hast alle Stationen des Pfarrkirchen Explorers abgeschlossen!
           </p>
           {/* Completion Recap and Share Button can be added here */}
         </div>
@@ -153,7 +152,7 @@ interface RouteOverviewProps {
 const RouteOverview: React.FC<RouteOverviewProps> = ({ stations, onComplete }) => {
   return (
     <div className="flex flex-col items-center">
-      <h2 className="text-2xl font-bold text-foreground mb-4">Route Overview</h2>
+      <h2 className="text-2xl font-bold text-foreground mb-4">Routenübersicht</h2>
       <div className="mb-4">
         <Map stations={stations} currentStation={0} />
       </div>
@@ -164,7 +163,7 @@ const RouteOverview: React.FC<RouteOverviewProps> = ({ stations, onComplete }) =
           </li>
         ))}
       </ul>
-      <Button onClick={onComplete}>Start Exploration</Button>
+      <Button onClick={onComplete}>Erkundung starten</Button>
     </div>
   );
 };

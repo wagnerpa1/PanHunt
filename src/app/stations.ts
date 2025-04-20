@@ -1,44 +1,47 @@
+
 export const stations = [
   {
     id: 1,
-    title: "Gartlberg Church",
-    riddle: "I stand tall, a beacon of faith, where silent bells resonate with grace. Find me atop the mount, where solace you'll count.",
-    correctAnswer: "Gartlberg Church",
+    title: "Gartlberg Kirche",
+    riddle: "Ich stehe hoch, ein Leuchtfeuer des Glaubens, wo stille Glocken mit Anmut widerhallen. Finde mich auf der Spitze des Berges, wo du Trost finden wirst.",
+    correctAnswer: "Gartlberg Kirche",
   },
   {
     id: 2,
-    title: "Old Racetrack Area",
-    riddle: "Where horses once thundered, now memories reside, a trace of the past where speed and thrill coincide. Seek the oval's remains, where history sustains.",
-    correctAnswer: "Old Racetrack Area",
+    title: "Alte Rennbahn",
+    riddle: "Wo einst Pferde donnerten, wohnen jetzt Erinnerungen, eine Spur der Vergangenheit, wo Geschwindigkeit und Nervenkitzel zusammentreffen. Suche die Überreste des Ovals, wo die Geschichte erhalten bleibt.",
+    correctAnswer: "Alte Rennbahn",
   },
   {
     id: 3,
-    title: "Altstadt / City Wall",
-    riddle: "Stone-clad embrace, guarding tales untold, walk along the path where history unfolds. Discover where the past still stands tall.",
-    correctAnswer: "Altstadt / City Wall",
+    title: "Altstadt / Stadtmauer",
+    riddle: "Steingekleidete Umarmung, die unzählige Geschichten bewacht, wandere den Pfad entlang, wo sich die Geschichte entfaltet. Entdecke, wo die Vergangenheit noch immer hoch steht.",
+    correctAnswer: "Altstadt",
   },
   {
     id: 4,
-    title: "Wimmer-Ross Fountain",
-    riddle: "Amidst the town's heart, water dances free, a symbol of life for all to see. Seek the horses drinking, where life-giving waters spring.",
-    correctAnswer: "Wimmer-Ross Fountain",
+    title: "Wimmer-Ross Brunnen",
+    riddle: "Inmitten des Stadtzentrums tanzt das Wasser frei, ein Symbol des Lebens für alle. Suche die trinkenden Pferde, wo lebensspendende Wasser entspringen.",
+    correctAnswer: "Wimmer-Ross Brunnen",
   },
   {
     id: 5,
-    title: "City Parish Church (Stadtpfarrkirche)",
-    riddle: "Underneath the roof, adorned with art so grand, a towering spire points to the promised land. Find solace in the house of God, where your prayers are heard.",
-    correctAnswer: "City Parish Church",
+    title: "Stadtpfarrkirche",
+    riddle: "Unter dem Dach, geschmückt mit so großartiger Kunst, ein hoch aufragender Turm, der auf das gelobte Land zeigt. Finde Trost im Haus Gottes, wo deine Gebete erhört werden.",
+    correctAnswer: "Stadtpfarrkirche",
   },
   {
     id: 6,
-    title: "New + Old Town Hall",
-    riddle: "Where decisions are made, and laws take flight, governance unfolds, shaping day and night. Two halls stand as one, old and new combined.",
-    correctAnswer: "New + Old Town Hall",
+    title: "Neues + Altes Rathaus",
+    riddle: "Wo Entscheidungen getroffen werden und Gesetze ihren Lauf nehmen, entfaltet sich die Regierung und gestaltet Tag und Nacht. Zwei Hallen stehen als eine, alt und neu vereint.",
+    correctAnswer: "Rathaus",
   },
   {
     id: 7,
-    title: "Heilig-Geist-Spital (Holy Spirit Hospital)",
-    riddle: "In the spirit's embrace, care and comfort reside, a haven of healing where compassion is the guide. Seek the place of care, where the Holy Spirit is there.",
+    title: "Heilig-Geist-Spital",
+    riddle: "In der Umarmung des Geistes wohnen Fürsorge und Trost, eine Oase der Heilung, in der Mitgefühl der Wegweiser ist. Suche den Ort der Fürsorge, wo der Heilige Geist ist.",
     correctAnswer: "Heilig-Geist-Spital",
   },
 ];
+
+    
