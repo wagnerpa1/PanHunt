@@ -170,10 +170,10 @@ const RouteOverview: React.FC<RouteOverviewProps> = ({ stations, onComplete }) =
       <div className="mb-4">
         <Map stations={stations} currentStation={0} />
       </div>
-      <ul className="list-disc list-inside mb-4">
+      <ul className="list-none pl-0 timeline">
         {stations.map((station) => (
-          <li key={station.id}>
-            {station.title} - {station.riddle}
+          <li key={station.id} className="mb-2">
+            {station.title}
           </li>
         ))}
       </ul>
