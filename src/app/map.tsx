@@ -4,12 +4,21 @@ import React, { useEffect, useRef } from "react";
 import { Icon } from "@iconify/react";
 
 interface MapProps {
-  stations: { id: number; title: string }[];
+  stations: {
+    id: number;
+    title: string;
+    latitude: number;
+    longitude: number;
+  }[];
   currentStation: number;
   zoom?: number;
 }
 
-export const Map: React.FC<MapProps> = ({ stations, currentStation, zoom = 13 }) => {
+export const Map: React.FC<MapProps> = ({
+  stations,
+  currentStation,
+  zoom = 13,
+}) => {
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -17,7 +26,10 @@ export const Map: React.FC<MapProps> = ({ stations, currentStation, zoom = 13 })
       const L = require("leaflet");
 
       if (mapRef.current && mapRef.current.children.length === 0) {
-        const map = L.map(mapRef.current).setView([48.4376, 12.9398], zoom); // Pfarrkirchen coordinates and zoom level
+        const map = L.map(mapRef.current).setView(
+          [48.4376, 12.9398],
+          zoom
+        ); // Pfarrkirchen coordinates and zoom level
 
         L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 19,
@@ -27,19 +39,15 @@ export const Map: React.FC<MapProps> = ({ stations, currentStation, zoom = 13 })
 
         // Add markers for each station
         stations.forEach((station) => {
-          // Replace with actual coordinates for each station
-          const stationCoordinates = getCoordinatesForStation(station.id);
-          if (stationCoordinates) {
-            L.marker([stationCoordinates.latitude, stationCoordinates.longitude])
-              .addTo(map)
-              .bindPopup(station.title);
-          }
+          L.marker([station.latitude, station.longitude])
+            .addTo(map)
+            .bindPopup(station.title);
         });
       }
     };
 
     const loadLeafletStyles = async () => {
-      await import('leaflet/dist/leaflet.css');
+      await import("leaflet/dist/leaflet.css");
     };
 
     loadLeafletStyles();
@@ -52,28 +60,6 @@ export const Map: React.FC<MapProps> = ({ stations, currentStation, zoom = 13 })
       }
     };
   }, [stations, currentStation, zoom]);
-
-  // Temporary function to provide coordinates for each station
-  const getCoordinatesForStation = (stationId: number) => {
-    switch (stationId) {
-      case 1:
-        return { latitude: 48.4354, longitude: 12.9381 }; // New + Old Town Hall
-      case 2:
-        return { latitude: 48.4349, longitude: 12.9384 }; // Altstadt / City Wall
-      case 3:
-        return { latitude: 48.4348, longitude: 12.9349 }; // Old Racetrack Area
-      case 4:
-        return { latitude: 48.4369, longitude: 12.9370 }; // Heilig-Geist-Spital
-      case 5:
-        return { latitude: 48.4358, longitude: 12.9394 }; // City Parish Church
-      case 6:
-        return { latitude: 48.4424, longitude: 12.9422 }; // Gartlberg Church
-      case 7:
-        return { latitude: 48.4334, longitude: 12.9404 }; // Wimmer-Ross Fountain
-      default:
-        return null;
-    }
-  };
 
   return (
     <div ref={mapRef} style={{ height: "300px", width: "100%" }}></div>
