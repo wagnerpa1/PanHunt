@@ -221,7 +221,7 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({
           <img
             src={station.mapUrl}
             alt={`Karte von ${station.title}`}
-            className="rounded-md map-animation-container"
+            className="rounded-md"
           />
         </div>
         <Button asChild className="transition-transform hover:scale-105">
@@ -258,7 +258,7 @@ const ExplanationScreen: React.FC<ExplanationScreenProps> = ({
           <img
             src={station.mapUrl}
             alt={`Karte von ${station.title}`}
-            className="rounded-md map-animation-container"
+            className="rounded-md"
           />
         </div>
         <p>{station.explanation}</p>
@@ -306,3 +306,4 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
     </Card>
   );
 };
+
