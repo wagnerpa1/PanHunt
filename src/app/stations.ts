@@ -67,7 +67,7 @@ export const stations = [
   },
   {
     id: 7,
-    title: "Wimmer-Ross Brunnen",
+    title: "Wimmer-Ross",
     riddle:
       "Inmitten des Stadtzentrums tanzt das Wasser frei, ein Symbol des Lebens für alle. Suche die trinkenden Pferde, wo lebensspendende Wasser entspringen.",
     correctAnswer: "Wimmer-Ross Brunnen",
