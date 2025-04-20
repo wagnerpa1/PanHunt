@@ -78,6 +78,7 @@ export default function Home() {
       setStationStage("navigation");
       setProgress(((currentStation) / totalStations) * 100);
       setAnswer("");
+      setFeedbackMessage("");
     } else {
       setIsCompleted(true);
     }
