@@ -110,10 +110,19 @@ export default function Home() {
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}
               />
-              <Button onClick={handleAnswerSubmit}>Submit Answer</Button>
               {feedbackMessage && (
-                <p className="text-sm text-muted-foreground">{feedbackMessage}</p>
+                <p
+                  className={`text-sm text-center mb-2 ${
+                    feedbackMessage === "Correct answer!"
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  {feedbackMessage}
+                </p>
               )}
+              <Button onClick={handleAnswerSubmit}>Submit Answer</Button>
+
             </CardContent>
           </Card>
         </>
