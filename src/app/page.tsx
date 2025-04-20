@@ -22,9 +22,8 @@ export default function Home() {
   const [isCompleted, setIsCompleted] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
   const [showOverview, setShowOverview] = useState(false);
-  const [stationStage, setStationStage] = useState<
-    "navigation" | "explanation" | "question"
-  >("navigation"); // "navigation", "explanation", "question"
+  const [stationStage, setStationStage] =
+    useState<"navigation" | "explanation" | "question">("navigation"); // "navigation", "explanation", "question"
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
@@ -49,7 +48,9 @@ export default function Home() {
 
     setSubmitted(true);
 
-    if (answer.toLowerCase() === currentStationData.correctAnswer.toLowerCase()) {
+    if (
+      answer.toLowerCase() === currentStationData.correctAnswer.toLowerCase()
+    ) {
       setStationStage("explanation"); // Go to explanation after correct answer
       setSubmitted(false);
       setFeedbackMessage("");
@@ -97,6 +98,13 @@ export default function Home() {
     doc.save("Pfarrkirchen_Explorer_Zertifikat.pdf");
   };
 
+  const handleBackToNavigation = () => {
+    setStationStage("navigation");
+    setAnswer("");
+    setFeedbackMessage("");
+    setSubmitted(false);
+  };
+
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-background py-8 px-4 sm:px-6 lg:px-8">
       {showWelcome ? (
@@ -105,9 +113,13 @@ export default function Home() {
             Willkommen beim Pfarrkirchen Explorer!
           </h1>
           <p className="text-lg text-muted-foreground mb-6">
-            Mach dich bereit, die verborgenen Schätze von Pfarrkirchen zu entdecken.
+            Mach dich bereit, die verborgenen Schätze von Pfarrkirchen zu
+            entdecken.
           </p>
-          <Button onClick={handleStartClick} className="transition-transform hover:scale-105">
+          <Button
+            onClick={handleStartClick}
+            className="transition-transform hover:scale-105"
+          >
             Starten
           </Button>
         </div>
@@ -155,6 +167,7 @@ export default function Home() {
                   feedbackMessage={feedbackMessage}
                   submitted={submitted}
                   handleAnswerSubmit={handleAnswerSubmit}
+                  onBackToNavigation={handleBackToNavigation}
                 />
               </div>
             )}
@@ -168,7 +181,10 @@ export default function Home() {
           <p className="text-muted-foreground mb-6">
             Du hast alle Stationen des Pfarrkirchen Explorers abgeschlossen!
           </p>
-          <Button onClick={handleDownloadCertificate} className="transition-transform hover:scale-105">
+          <Button
+            onClick={handleDownloadCertificate}
+            className="transition-transform hover:scale-105"
+          >
             Zertifikat herunterladen
           </Button>
           {/* Completion Recap and Share Button can be added here */}
@@ -183,11 +199,16 @@ interface RouteOverviewProps {
   onComplete: () => void;
 }
 
-const RouteOverview: React.FC<RouteOverviewProps> = ({ stations, onComplete }) => {
+const RouteOverview: React.FC<RouteOverviewProps> = ({
+  stations,
+  onComplete,
+}) => {
   return (
     <div className="flex flex-col items-center">
-      <h2 className="text-2xl font-bold text-foreground mb-4">Routenübersicht</h2>
-      <div className="mb-4 w-full max-w-md">
+      <h2 className="text-2xl font-bold text-foreground mb-4">
+        Routenübersicht
+      </h2>
+      <div className="mb-4 w-full max-w-md map-animation-container">
         <Map stations={stations} currentStation={0} zoom={12} />
       </div>
       <ul className="list-none pl-0 timeline max-w-md w-full">
@@ -197,13 +218,18 @@ const RouteOverview: React.FC<RouteOverviewProps> = ({ stations, onComplete }) =
           </li>
         ))}
       </ul>
-      <Button onClick={onComplete} className="transition-transform hover:scale-105">Erkundung starten</Button>
+      <Button
+        onClick={onComplete}
+        className="transition-transform hover:scale-105"
+      >
+        Erkundung starten
+      </Button>
     </div>
   );
 };
 
 interface NavigationScreenProps {
-  station: { id: number; title: string; mapUrl: string, googleMapsLink: string };
+  station: { id: number; title: string; mapUrl: string; googleMapsLink: string };
   onArrived: () => void;
 }
 
@@ -217,11 +243,11 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({
         <CardTitle>Navigation zu {station.title}</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <div >
+        <div>
           <img
             src={station.mapUrl}
             alt={`Karte von ${station.title}`}
-            className="rounded-md"
+            className="rounded-md map-animation-container"
           />
         </div>
         <Button asChild className="transition-transform hover:scale-105">
@@ -233,14 +259,19 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({
             Route in Google Maps öffnen
           </a>
         </Button>
-        <Button onClick={onArrived} className="transition-transform hover:scale-105">Angekommen!</Button>
+        <Button
+          onClick={onArrived}
+          className="transition-transform hover:scale-105"
+        >
+          Angekommen!
+        </Button>
       </CardContent>
     </Card>
   );
 };
 
 interface ExplanationScreenProps {
-  station: { id: number; title: string; explanation: string, mapUrl: string };
+  station: { id: number; title: string; explanation: string; mapUrl: string };
   onComplete: () => void;
 }
 
@@ -254,15 +285,20 @@ const ExplanationScreen: React.FC<ExplanationScreenProps> = ({
         <CardTitle>Mehr über {station.title}</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4">
-      <div >
+        <div>
           <img
             src={station.mapUrl}
             alt={`Karte von ${station.title}`}
-            className="rounded-md"
+            className="rounded-md map-animation-container"
           />
         </div>
         <p>{station.explanation}</p>
-        <Button onClick={onComplete} className="transition-transform hover:scale-105">Weiter</Button>
+        <Button
+          onClick={onComplete}
+          className="transition-transform hover:scale-105"
+        >
+          Weiter
+        </Button>
       </CardContent>
     </Card>
   );
@@ -275,6 +311,7 @@ interface QuestionScreenProps {
   feedbackMessage: string;
   submitted: boolean;
   handleAnswerSubmit: () => void;
+  onBackToNavigation: () => void;
 }
 
 const QuestionScreen: React.FC<QuestionScreenProps> = ({
@@ -284,6 +321,7 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
   feedbackMessage,
   submitted,
   handleAnswerSubmit,
+  onBackToNavigation,
 }) => {
   return (
     <Card className="w-full max-w-md">
@@ -293,7 +331,9 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
       </CardHeader>
       <CardContent className="grid gap-4">
         {feedbackMessage && (
-          <div className="text-center text-red-500 mb-2">{feedbackMessage}</div>
+          <div className="text-center text-red-500 mb-2">
+            {feedbackMessage}
+          </div>
         )}
         <Input
           type="text"
@@ -301,9 +341,19 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
         />
-        <Button onClick={handleAnswerSubmit} className="transition-transform hover:scale-105">Antwort absenden</Button>
+        <Button
+          onClick={handleAnswerSubmit}
+          className="transition-transform hover:scale-105"
+        >
+          Antwort absenden
+        </Button>
+        <Button
+          onClick={onBackToNavigation}
+          className="transition-transform hover:scale-105"
+        >
+          Zurück zur Navigation
+        </Button>
       </CardContent>
     </Card>
   );
 };
-
