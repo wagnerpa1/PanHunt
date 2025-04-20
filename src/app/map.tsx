@@ -72,6 +72,6 @@ export const Map: React.FC<MapProps> = ({ stations, currentStation, zoom = 13 })
   };
 
   return (
-    <div ref={mapRef} style={{ height: "400px", width: "100%" }}></div>
+    <div ref={mapRef} style={{ height: "300px", width: "100%" }}></div>
   );
 };

@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { Map } from "./map";
 import { stations } from "./stations";
+import { jsPDF } from "jspdf";
 
 export default function Home() {
   const [currentStation, setCurrentStation] = useState(1);
@@ -82,17 +83,32 @@ export default function Home() {
     }
   };
 
+  const handleDownloadCertificate = () => {
+    const doc = new jsPDF();
+
+    // Add content to the PDF
+    doc.text("Zertifikat für den Abschluss des Pfarrkirchen Explorers", 10, 10);
+    doc.text("Herzlichen Glückwunsch!", 10, 30);
+    doc.text("Sie haben alle Stationen erfolgreich abgeschlossen.", 10, 40);
+    doc.text("Ausgestellt am: " + new Date().toLocaleDateString(), 10, 50);
+
+    // Download the PDF
+    doc.save("Pfarrkirchen_Explorer_Zertifikat.pdf");
+  };
+
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen bg-background py-8 px-4">
+    <div className="flex flex-col items-center justify-start min-h-screen bg-background py-8 px-4 sm:px-6 lg:px-8">
       {showWelcome ? (
         <div className="text-center">
           <h1 className="text-4xl font-bold text-foreground mb-4">
             Willkommen beim Pfarrkirchen Explorer!
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg text-muted-foreground mb-6">
             Mach dich bereit, die verborgenen Schätze von Pfarrkirchen zu entdecken.
           </p>
-          <Button onClick={handleStartClick}>Starten</Button>
+          <Button onClick={handleStartClick} className="transition-transform hover:scale-105">
+            Starten
+          </Button>
         </div>
       ) : showOverview ? (
         <RouteOverview stations={stations} onComplete={handleOverviewComplete} />
@@ -138,9 +154,12 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-foreground mb-4">
             Herzlichen Glückwunsch!
           </h2>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground mb-6">
             Du hast alle Stationen des Pfarrkirchen Explorers abgeschlossen!
           </p>
+          <Button onClick={handleDownloadCertificate} className="transition-transform hover:scale-105">
+            Zertifikat herunterladen
+          </Button>
           {/* Completion Recap and Share Button can be added here */}
         </div>
       )}
@@ -157,17 +176,17 @@ const RouteOverview: React.FC<RouteOverviewProps> = ({ stations, onComplete }) =
   return (
     <div className="flex flex-col items-center">
       <h2 className="text-2xl font-bold text-foreground mb-4">Routenübersicht</h2>
-      <div className="mb-4">
-        <Map stations={stations} currentStation={0} />
+      <div className="mb-4 w-full max-w-md">
+        <Map stations={stations} currentStation={0} zoom={12} />
       </div>
-      <ul className="list-none pl-0 timeline">
+      <ul className="list-none pl-0 timeline max-w-md w-full">
         {stations.map((station) => (
           <li key={station.id} className="mb-2">
             {station.title}
           </li>
         ))}
       </ul>
-      <Button onClick={onComplete}>Erkundung starten</Button>
+      <Button onClick={onComplete} className="transition-transform hover:scale-105">Erkundung starten</Button>
     </div>
   );
 };
@@ -192,7 +211,7 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({
           alt={`Karte von ${station.title}`}
           className="rounded-md"
         />
-        <Button asChild>
+        <Button asChild className="transition-transform hover:scale-105">
           <a
             href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
               station.title
@@ -203,7 +222,7 @@ const NavigationScreen: React.FC<NavigationScreenProps> = ({
             Route in Google Maps öffnen
           </a>
         </Button>
-        <Button onClick={onArrived}>Angekommen!</Button>
+        <Button onClick={onArrived} className="transition-transform hover:scale-105">Angekommen!</Button>
       </CardContent>
     </Card>
   );
@@ -225,7 +244,7 @@ const ExplanationScreen: React.FC<ExplanationScreenProps> = ({
       </CardHeader>
       <CardContent className="grid gap-4">
         <p>{station.explanation}</p>
-        <Button onClick={onComplete}>Weiter</Button>
+        <Button onClick={onComplete} className="transition-transform hover:scale-105">Weiter</Button>
       </CardContent>
     </Card>
   );
@@ -261,18 +280,7 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
         />
-        {submitted && (
-          <p
-            className={`text-sm text-center mb-2 ${
-              feedbackMessage === "Korrekte Antwort!"
-                ? "text-green-500"
-                : "text-red-500"
-            }`}
-          >
-            {feedbackMessage}
-          </p>
-        )}
-        <Button onClick={handleAnswerSubmit}>Antwort absenden</Button>
+        <Button onClick={handleAnswerSubmit} className="transition-transform hover:scale-105">Antwort absenden</Button>
       </CardContent>
     </Card>
   );
